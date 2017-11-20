@@ -1,6 +1,7 @@
 import tensorflow as tf
 import matplotlib.pyplot as plt
 import numpy as np
+import progressbar
 
 from basic_classifier_model import BasicClassifierModel
 
@@ -10,31 +11,32 @@ class BasicClassifierService(object):
         self.model = BasicClassifierModel(input_size, output_size)
         self.model.create(learning_rate)
 
-    def train(self, train_x, train_y, epochs=1000):
+    def train(self, train_x, train_y, epochs=100):
         variables = tf.initialize_all_variables()
         with tf.Session() as sess:
             sess.run(variables)
             saver = tf.train.Saver(max_to_keep=None)
-            t_index = 0
-            for epoch in range(epochs):
-                avg_cost = 0.0
-                length = len(train_x)
-                for index in range(length):
-                    input_data = np.asarray([[train_x[index]]])
-                    label_data = np.asarray([train_y[index]])
-                    _, c = sess.run([self.model.optimizer, self.model.cost],
-                                    feed_dict={
-                                        self.model.input: input_data,
-                                        self.model.output: label_data})
-                    avg_cost += c
-                    t_index += 1
-                avg_cost = avg_cost / length
-                # plt.plot(t_index, avg_cost, 'cost')
-                print('Epoch:', '%04d' % (epoch + 1), 'cost=',
-                      '{:.9f}'.format(avg_cost))
-            # plt.xlabel('Epoch')
-            # plt.ylabel('Cost')
-            # plt.savefig('epoch.png', dpi=200)
+            with progressbar.ProgressBar(max_value=epochs) as bar:
+                for epoch in range(epochs):
+                    avg_cost = 0.0
+                    length = len(train_x)
+                    for index in range(length):
+                        input_data = np.asarray([[train_x[index]]])
+                        label_data = np.asarray([train_y[index]])
+                        _, c = sess.run([self.model.optimizer, self.model.cost],
+                                        feed_dict={
+                                            self.model.input: input_data,
+                                            self.model.output: label_data})
+                        avg_cost += c
+                    avg_cost = avg_cost / length
+                    plt.plot(epoch, avg_cost, 'bo')
+                    bar.update(epoch)
+            plt.title(self.model.name + ' training line')
+            plt.xlabel('Epoch')
+            plt.ylabel('Cost')
+            plt.savefig('epoch.png', dpi=200)
+            print('Epoch:', '%04d' % (epoch + 1), 'final cost=',
+                  '{:.9f}'.format(avg_cost))
             saver.save(sess, 'model/' + self.model.name)
 
     def test(self, test_x, test_y):
