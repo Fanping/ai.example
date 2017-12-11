@@ -6,7 +6,7 @@ class BasicClassifierModel(object):
         self.name = "basic-classifier"
         self.input_size = in_size
         self.hiddens = [4, 8, 2]
-        self.num_of_persons = out_size
+        self.output_size = out_size
         self.input = None
         self.output = None
         self.weights = None
@@ -21,7 +21,7 @@ class BasicClassifierModel(object):
         self.input = tf.placeholder("float",
                                     [None, self.input_size])
         self.output = tf.placeholder("float",
-                                     [None, self.num_of_persons])
+                                     [None, self.output_size])
         self.weights = {
             'h1': tf.Variable(
                 tf.random_normal([self.input_size, self.hiddens[0]])),
@@ -30,13 +30,13 @@ class BasicClassifierModel(object):
             'h3': tf.Variable(
                 tf.random_normal([self.hiddens[1], self.hiddens[2]])),
             'out': tf.Variable(
-                tf.random_normal([self.hiddens[2], self.num_of_persons]))
+                tf.random_normal([self.hiddens[2], self.output_size]))
         }
         self.bias = {
             'h1': tf.Variable(tf.random_normal([self.hiddens[0]])),
             'h2': tf.Variable(tf.random_normal([self.hiddens[1]])),
             'h3': tf.Variable(tf.random_normal([self.hiddens[2]])),
-            'out': tf.Variable(tf.random_normal([self.num_of_persons]))
+            'out': tf.Variable(tf.random_normal([self.output_size]))
         }
 
         # 2. Config layers.
