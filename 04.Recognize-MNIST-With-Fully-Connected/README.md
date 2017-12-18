@@ -1,5 +1,6 @@
 # Example:Handwritten digit recognition based on fully connected neural network.
-This is an example for handwritten digit recognition, The recognition result is a number from 0 to 9, and the training set is based on the MNIST dataset.
+This is an example for handwritten digit recognition, The recognition result is a number from 0 to 9, and the training set is based on the MNIST dataset.The training accuracy is about 98%.
+
  
  How to train?
  ```python

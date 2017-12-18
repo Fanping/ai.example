@@ -23,5 +23,5 @@ class MnistRegModel(object):
         self.cross_entropy = tf.reduce_mean(
             tf.nn.softmax_cross_entropy_with_logits(labels=self.output,
                                                     logits=self.net))
-        self.optimizer = tf.train.AdamOptimizer(self.learning_rate).minimize(
+        self.optimizer = tf.train.GradientDescentOptimizer(self.learning_rate).minimize(
             self.cross_entropy)
