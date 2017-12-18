@@ -19,9 +19,9 @@ class BasicClassifierModel(object):
     def create(self, learning_rate):
         # 1. Init all
         self.input = tf.placeholder("float",
-                                    [None, self.input_size])
+                                    [None, self.input_size], name='x_input')
         self.output = tf.placeholder("float",
-                                     [None, self.output_size])
+                                     [None, self.output_size], name='y_output')
         self.weights = {
             'h1': tf.Variable(
                 tf.random_normal([self.input_size, self.hiddens[0]])),

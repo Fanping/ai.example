@@ -15,5 +15,6 @@ How to test?
  ```python
  python3 ./basic_classifier_app.py --execute=test
  ```
+ If you want to convert any model to java, please see export_model_to_java_app.py
  
  Any questions please contact me，email address:<liufanping@iveely.com>.
