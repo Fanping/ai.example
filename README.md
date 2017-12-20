@@ -7,5 +7,6 @@ Basic application examples of artificial intelligence using tensorflow.
 *   [05.Recognize MNIST With CNN](https://github.com/Fanping/ai.example/tree/master/05.Recognize-MNIST-With-CNN)
 *   [06.Text-Classify-With-CNN](https://github.com/Fanping/ai.example/tree/master/06.Text-Classify-With-CNN)
 *   [07.Text-Classify-With-RNN](https://github.com/Fanping/ai.example/tree/master/07.Text-Classify-With-RNN)
+*   [08.Handwriting-Generated-With-GAN](https://github.com/Fanping/ai.example/tree/master/08.Handwriting-Generated-With-GAN)
 
 Any questions please contact me，email address:<liufanping@iveely.com>.
