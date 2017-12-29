@@ -37,7 +37,7 @@ class TextClassifierCNNModel(object):
         with tf.name_scope("fcn"):
             fc_1 = tf.layers.dense(max_pooling_layer, 128,
                                    name='fc_1')
-            fc_1 = tf.contrib.layers.create_cell(fc_1, self.keep_prob)
+            fc_1 = tf.contrib.layers.dropout(fc_1, self.keep_prob)
             fc_1 = tf.nn.relu(fc_1)
             self.net = tf.layers.dense(fc_1, num_classes,
                                        name='fc_2')
