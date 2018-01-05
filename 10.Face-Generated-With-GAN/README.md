@@ -9,10 +9,9 @@ Using GAN for simple face generation experiments.
  
  #### Examples of generated faces
  
-| *Epoch=1* | *Epoch300* | ... |
+| *Epoch=1* | *Epoch=300* | ... |
 :---: | :---: | :---: |
-<img src='../data/images/10/epoch-1.jpg' height='475px'> | <img src='../data/images/10/epoch-300.jpg' height='475px'>
-...|...|...|
+<img src='../data/images/10/epoch-1.jpg' height='475px'> | <img src='../data/images/10/epoch-300.jpg' height='475px'>|...|
 
 Although the effect is rather vague, but the effect has been vaguely seen.<br/>
 
