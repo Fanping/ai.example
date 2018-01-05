@@ -8,6 +8,7 @@ Basic application examples of artificial intelligence using tensorflow.
 *   [06.Text-Classify-With-CNN](https://github.com/Fanping/ai.example/tree/master/06.Text-Classify-With-CNN)
 *   [07.Text-Classify-With-RNN](https://github.com/Fanping/ai.example/tree/master/07.Text-Classify-With-RNN)
 *   [08.Handwriting-Generated-With-GAN](https://github.com/Fanping/ai.example/tree/master/08.Handwriting-Generated-With-GAN)
+*   [09.Face-Recognition-By-Image-Classification](https://github.com/Fanping/ai.example/tree/master/09.Face-Recognition-By-Image-Classification)
 
 ### （1）How can you run all examples ?
 Each of the directories is an independent project, and you can run it in the environment on Python 3.5 and TensorFlow 1.2.1+.
