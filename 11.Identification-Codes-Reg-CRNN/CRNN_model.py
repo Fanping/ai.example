@@ -105,10 +105,11 @@ class CRNN_Model(object):
         rnn = self._create_rnn(self._feature_2_sequences(cnn))
 
         # 3. FCN model.
-        W = tf.Variable(
-            tf.truncated_normal([512, self.num_classes], stddev=0.1),
-            name="W")
-        b = tf.Variable(tf.constant(0., shape=[self.num_classes]), name="b")
+        W = tf.get_variable("weight", [512, self.num_classes],
+                            initializer=tf.random_normal_initializer())
+
+        b = tf.get_variable("bias", shape=[self.num_classes],
+                            initializer=tf.random_normal_initializer())
         fcn_layer = tf.matmul(tf.reshape(rnn, [-1, 512]), W) + b
         logits = tf.reshape(fcn_layer, [batch_size, -1,
                                         self.num_classes])
@@ -118,8 +119,7 @@ class CRNN_Model(object):
         self.loss = tf.reduce_mean(
             tf.nn.ctc_loss(self.output, self.net, self.sequence_len))
 
-        self.optimizer = tf.train.MomentumOptimizer(0.1, 0.9).minimize(
-            self.loss)
+        self.optimizer = tf.train.AdamOptimizer(1e-4).minimize(self.loss)
 
         # 5. Decode result.
         self.decode_ret, self.decode_prob = tf.nn.ctc_beam_search_decoder(

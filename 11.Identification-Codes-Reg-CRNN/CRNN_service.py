@@ -57,7 +57,9 @@ class CRNN_Service(object):
         with tf.Session() as session:
             session.run(variables)
             saver = tf.train.Saver(max_to_keep=None)
-
+            last_ckpt_path = tf.train.latest_checkpoint('model/')
+            if last_ckpt_path is not None:
+                saver.restore(session, last_ckpt_path)
             for epoch in range(num_epochs):
                 print('Epoch:', epoch + 1)
                 avg_loss = 0
@@ -104,4 +106,5 @@ class CRNN_Service(object):
             }
             decode_ret, decode_prob = session.run(
                 [self.model.decode_ret, self.model.decode_prob], feed_dict)
-            return ''.join([self.chars[i] for i in decode_ret[0][1]])
+            return ''.join(
+                [self.chars[i] for i in decode_ret[0][1]])
