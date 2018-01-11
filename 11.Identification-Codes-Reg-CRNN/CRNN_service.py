@@ -48,7 +48,7 @@ class CRNN_Service(object):
             labels.append(self._label_to_array(label))
         return images, labels
 
-    def train(self, num_epochs=10, batch_size=1):
+    def train(self, num_epochs=10000, batch_size=1):
         self.model = CRNN_Model()
         self.model.create(batch_size, len(self.chars))
         images, labels = self._process_images(
@@ -60,6 +60,7 @@ class CRNN_Service(object):
             last_ckpt_path = tf.train.latest_checkpoint('model/')
             if last_ckpt_path is not None:
                 saver.restore(session, last_ckpt_path)
+            last_loss = -1
             for epoch in range(num_epochs):
                 print('Epoch:', epoch + 1)
                 avg_loss = 0
@@ -77,7 +78,11 @@ class CRNN_Service(object):
                             self.model.output: lab
                         })
                     avg_loss += loss
-                print('loss:', avg_loss / len(images))
+                avg_loss = avg_loss / len(images)
+                print('loss:', avg_loss)
+                if abs(last_loss - avg_loss) < 0.00001:
+                    break
+                last_loss = avg_loss
             saver.save(session, 'model/' + self.model.name)
 
     def predict(self, image_file):
