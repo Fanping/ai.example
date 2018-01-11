@@ -4,7 +4,7 @@ import sys
 import math
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 
-font_path = '/Library/Fonts/Arial.ttf'
+font_path = '../data/identification_codes/Arial.ttf'
 number = 4
 size = (60, 30)
 bgcolor = (255, 255, 255)
